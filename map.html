@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        /어ㅏㅇ아아아
+        <!-- <script>
+            
+            fn_clickView = function(num) {
+                fn_init();
+                $("#mapNum").val(num);
+                $("img[id^=local]").each(function(i) {
+                    var ival = ((""+eval(i+1)).length < 2) ? "0"+eval(i+1) : ""+eval(i+1);
+                    if(num == ival) {
+                        $(this).attr("src", "../../images/recyclingcenter/map/map_" + num + "_on.png");
+                        $("#map_"+num).show();
+                    }else {
+                        $(this).attr("src", "../../images/recyclingcenter/map/map_" + ival + "_off.png");
+                        $("#map_"+ival).hide();
+                }   
+            });
+        
+            fn_getMapInfo(num, 1);
+            return false;
+        };
+        
+        fn_init = function() {
+            $(".txt_01").children("*").remove();
+        }
+        
+        // //지도클릭시 정보얻기
+        // fn_getMapInfo = function(num, currPage) {
+        //     var region = "";
+            
+        //     if(num == "01")         region = "11";   else if(num == "02")   region = "28";   else if(num == "03")   region = "41";
+        //     else if(num == "04")   region = "42";   else if(num == "05")   region = "44";   else if(num == "06")   region = "47";
+        //     else if(num == "07")   region = "30";   else if(num == "08")   region = "27";   else if(num == "09")   region = "45";
+        //     else if(num == "10")   region = "31";   else if(num == "11")   region = "48";   else if(num == "12")   region = "26";
+        //     else if(num == "13")   region = "43";   else if(num == "14")   region = "36";   else if(num == "15")   region = "46";
+        //     else if(num == "16")   region = "50";   else if(num == "17")   region = "29";
+        
+        //     $.ajax({
+        //         type: "POST",
+        //         dataType:"json",
+        //         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+        //         async: false,
+        //         headers: { "cache-control": "no-cache" },
+        //         url: "/recy/viewRecyCenterMap.do",
+        //         data: {
+        //                  mapCurrPage : currPage
+        //                 ,region : region
+        //               },
+        //         success: function(data){  
+        //             var mapTotCnt = parseInt(data[1].mapTotCnt,10);
+        //             var innerHTML = "";
+        //             if(!data[0][0]) {
+        //                 //innerHTML = '<div id="noData" style="text-align:center;font-size:15px;margin-top:5px;">데이터 미존재</center>';
+        //                 //$("#map_"+num+" .txt_01").append(innerHTML);
+                        
+        //             }else {
+        //                 innerHTML += '<table style="width:100%;">';
+        //                 innerHTML += '   <colgroup>';
+        //                 innerHTML += '      <col width="50%"></col>';
+        //                 innerHTML += '      <col width="50%"></col>';
+        //                 innerHTML += '   </colgroup>';
+                        
+        //                 dataLength = data[0].length;
+        //                 for(var i=0; i<dataLength; i++) {
+        //                     data[0][i].MARKET_NM = chkNullYn(data[0][i].CENTER_NM) ? '' : data[0][i].CENTER_NM; 
+        //                     data[0][i].HOMEPAGE  = chkNullYn(data[0][i].HOMEPAGE) ? '' : data[0][i].HOMEPAGE;
+        //                     var tabindexA = i+125;
+        //                     if(data[0][i].HOMEPAGE != '' && data[0][i].HOMEPAGE.indexOf("http://")<0){
+        //                         data[0][i].HOMEPAGE = "http://"+data[0][i].HOMEPAGE;
+        //                     }
+                            
+        //                     var ival = eval(i+1);
+        //                     if(ival%2 == 1)
+        //                         innerHTML += '   <tr>';
+        //                     if(data[0][i].HOMEPAGE == '') {
+        //                         innerHTML += '<td style="height:40px; text-align:center; font-size:15px; border-right:1px solid #c8c8c8; border-bottom:1px solid #c8c8c8;">'
+        //                                         + '<a href="#" onclick="javascript:fn_notPage(); return false;">' + data[0][i].CENTER_NM + '</a></td>';
+        //                     }else {
+        //                         var tabindexB = i+66;
+        //                         innerHTML += '<td style="height:40px; text-align:center; font-size:15px; border-right:1px solid #c8c8c8; border-bottom:1px solid #c8c8c8;">'
+        //                                         + '<a href="'+ data[0][i].HOMEPAGE +'" title="새창열림" target="_blank">' + data[0][i].CENTER_NM + '</a></td>';
+        //                     }
+        //                     tabindexC = tabindexA;
+        //                     if(ival%2 == 0)
+        //                         innerHTML += '   </tr>';
+        //                 }
+        //                 innerHTML += '</table>';
+        //                 innerHTML += '<div id="mapPage" style="text-align:center;margin:15px 0 0 0;"></div>';
+                        
+        //                 $("#map_"+num+" .txt_01").append(innerHTML);
+        //                 $("#mapPage").jqueryPager({pageSize: 16, pageBlock: 5, currentPage: currPage, pageTotal: mapTotCnt}); 
+        //             }
+        //         },
+        //         error : function(xhr, status, error) {
+        //             question_temp_open("200","alert","","805","에러발생");
+        //             return;
+        //         }
+        //     });
+        // };
+        //         </script> -->
+    </head>
+
+    <body>
+        <style>
+            .mapsearch {
+                width:70%; 
+                border:#c3c3c3 1px solid; 
+                display: block; 
+                position: relative; 
+                overflow: hidden; 
+                background: url("images/img_002.png") no-repeat scroll 0 0 transparent;
+                background-color:rgba(241, 241, 240, 1); box-sizing:border-box;
+                }
+
+            .mapsearch .linkbanners {
+                width:440px;
+                display: block;
+                overflow: hidden; 
+                float: right; 
+                margin:80px 20px;
+                }
+
+            .mapsearch .linkbanners h2 {
+                display: block; 
+                position: relative; 
+                overflow: hidden; 
+                font-size:24px; color:#02ad02; 
+                font-weight: 700; 
+                background: url("images/img_001.png") no-repeat scroll 0 -99px transparent; 
+                padding:0 0 10px 30px; 
+                min-height:57px; 
+                }
+            
+            .mapsearch .linkbanners .txt_01 {
+                width:439px; 
+                height:376px;
+                display: block;
+                float: left; 
+                overflow: hidden; 
+                background:#fff; 
+                border:#c3c3c3 1px solid; 
+                }
+           
+            .mapsearch .linkbanners .txt_01 ul li {
+                width:200px;
+                height:60px;
+                background-color:#fff;
+                float: left; 
+                margin:2px 0 0 11px;
+                border:#d3d3d3 1px solid;
+                /* background: url("../images/recyclingcenter/banners_001.png") no-repeat scroll transparent; */
+                font-size: 0;
+                line-height: 0;
+                text-indent: -9999px;
+                }
+
+
+        </style>
+        <div  class="center" id = "viewToilet">
+        <div class="mapsearch">
+            <!--서울특별시-->
+            <a href="#" id="map_btn_01" onclick="return fn_clickView('01');" style="position:absolute; left:162px; top:76px; z-index:99;">
+                <img src="images/seoul.png" id="local_01" name="local_01" alt="서울특별시">
+            </a>
+            <div id="map_01" class="linkbanners" style="display: block;">
+                <h2>서울특별시</h2>
+                <div class="txt_01">
+                    <table style="width:100%;">   
+                        <colgroup>
+                            <col width="50%">
+                            <col width="50%">
+                        </colgroup>   
+                        <tbody>
+                            <tr>
+                                <td style="height:40px; text-align:center; font-size:15px; 
+                                           border-right:1px solid #c8c8c8; border-bottom:1px solid #c8c8c8;">
+                                           <a href="#" title="새창열림" target="_blank">화장실1</a>
+                                </td>
+                                <td style="height:40px; text-align:center; font-size:15px; 
+                                           border-right:1px solid #c8c8c8;  border-bottom:1px solid #c8c8c8;">
+                                           <a href="#" title="새창열림" target="_blank">화장실2</a>
+                                </td>   
+                            </tr>   
+                            <tr>
+                                <td style="height:40px; text-align:center; font-size:15px; 
+                                           border-right:1px solid #c8c8c8; border-bottom:1px solid #c8c8c8;">
+                                           <a href="#" onclick="javascript:fn_notPage(); return false;">화장실3</a>
+                                </td>
+                                <td style="height:40px; text-align:center; font-size:15px; 
+                                           border-right:1px solid #c8c8c8; border-bottom:1px solid #c8c8c8;">
+                                           <a href="#" onclick="javascript:fn_notPage(); return false;">화장실4</a>
+                                </td>   
+                            </tr>   
+                        </tbody>
+                    </table>
+                        <div id="mapPage" style="text-align:center;margin:15px 0 0 0;">
+                            <span style="margin-left:5px">1</span>
+                            <span style="margin-left:5px">
+                                <a href="#" onclick="goPage(2); return false;">[2]</a>
+                            </span>
+                        </div>
+                    </div>
+            </div>
+            
+            <!--인천-->
+            <a href="#" id="map_btn_02" onclick="return fn_clickView('02');" style="position:absolute; left:64px; top:107px; z-index:99;">
+                <img src="images/Incheon.png" id="local_02" alt="인천">
+            </a>
+            <div id="map_02" class="linkbanners" style="display: none;">
+                <h2>인천광역시</h2>
+                <div class="txt_01"></div>
+            </div>
+
+            <!--경기도-->
+            <a href="#" id="map_btn_03" onclick="return fn_clickView('03');" style="position:absolute; left:153px; top:40px; z-index:98;">
+                <img src="images/Gyeonggido.png" id="local_03" alt="경기도">
+            </a>
+            <div id="map_03" class="linkbanners" style="display: none;">
+                <h2>경기도</h2>
+                <div class="txt_01"></div>
+            </div>
+            
+            <!--강원도-->
+            <a href="#" id="map_btn_04" onclick="return fn_clickView('04');" style="position:absolute; left:238px; top:5px;">
+                <img src="images/Gangwondo.png" id="local_04" alt="강원도">
+            </a>
+            <div id="map_04" class="linkbanners" style="display: none;">
+                <h2>강원도</h2>
+                <div class="txt_01"></div>
+            </div>
+            
+            <!--충남-->
+            <a href="#" id="map_btn_05" onclick="return fn_clickView('05');" style="position:absolute; left:134px; top:171px; z-index:98;">
+                <img src="images/CND.png" id="local_05" alt="충남">
+            </a>
+            <div id="map_05" class="linkbanners" style="display:none;">
+                <h2>충청남도</h2>
+                <div class="txt_01"></div>
+            </div>
+            
+            <!--경북-->
+            <a href="#" id="map_btn_06" onclick="return fn_clickView('06');" style="position:absolute; left:287px; top:181px; z-index:98;">
+                <img src="images/GBD.png" id="local_06" alt="경북">
+            </a>
+            <div id="map_06" class="linkbanners" style="display: none;">
+                <h2>경상북도</h2>
+                <div class="txt_01"></div>
+            </div>
+            
+            <!--대전-->
+            <a href="#" id="map_btn_07" onclick="return fn_clickView('07');" style="position:absolute; left:192px; top:214px; z-index:99;">
+                <img src="images/Daejeon.png" id="local_07" alt="대전">
+            </a>
+            <div id="map_07" class="linkbanners" style="display:none;">
+                <h2>대전광역시</h2>
+                <div class="txt_01"></div>
+            </div>
+            
+            <!--대구-->
+            <a href="#" id="map_btn_08" onclick="return fn_clickView('08');" style="position:absolute; left:298px; top:282px; z-index:99;">
+                <img src="images/Daegu.png" id="local_08" alt="대구">
+            </a>
+            <div id="map_08" class="linkbanners" style="display:none;">
+                <h2>대구광역시</h2>
+                <div class="txt_01"></div>
+            </div>
+            
+            <!--전북-->
+            <a href="#" id="map_btn_09" onclick="return fn_clickView('09');" style="position:absolute; left:151px; top:275px; z-index:98;">
+                <img src="images/JBD.png" id="local_09" alt="전북">
+            </a>
+            <div id="map_09" class="linkbanners" style="display:none;">
+                <h2>전라북도</h2>
+                <div class="txt_01"></div>
+            </div>
+            
+            <!--울산-->
+            <a href="#" id="map_btn_10" onclick="return fn_clickView('10');" style="position:absolute; left:362px; top:332px; z-index:99;">
+                <img src="images/Ulsan.png" id="local_10" alt="울산">
+            </a>
+            <div id="map_10" class="linkbanners" style="display:none;">
+                <h2>울산광역시</h2>
+                <div class="txt_01"></div>
+            </div>
+            
+            <!--경남-->
+            <a href="#" id="map_btn_11" onclick="return fn_clickView('11');" style="position:absolute; left:255px; top:310px; z-index:98;">
+                <img src="images/GND.png" id="local_11" alt="경남">
+            </a>
+            <div id="map_11" class="linkbanners" style="display:none;">
+                <h2>경상남도</h2>
+                <div class="txt_01"></div>
+            </div>
+            
+            <!--부산-->
+            <a href="#" id="map_btn_12" onclick="return fn_clickView('12');" style="position:absolute; left:370px; top:385px; z-index:99;">
+                <img src="images/Busan.png" id="local_12" alt="부산">
+            </a>
+            <div id="map_12" class="linkbanners" style="display:none;">
+                <h2>부산광역시</h2>
+                <div class="txt_01"></div>
+            </div>
+            
+            <!--충북-->
+            <a href="#" id="map_btn_13" onclick="return fn_clickView('13');" style="position:absolute; left:240px; top:160px; z-index:98;">
+                <img src="images/CBD.png" id="local_13" alt="충북">
+            </a>
+            <div id="map_13" class="linkbanners" style="display:none;">
+                <h2>충청북도</h2>
+                <div class="txt_01"></div>
+            </div>
+            
+            <!--세종특별시-->
+            <a href="#" id="map_btn_14" onclick="return fn_clickView('14');" style="position:absolute; left:56px; top:248px; z-index:99;">
+                <img src="images/Sejong.png" id="local_14" alt="세종특별자치시">
+            </a>
+            <div id="map_14" class="linkbanners" style="display: none;">
+                <h2>세종특별자치시</h2>
+                <div class="txt_01"></div>
+            </div>   
+            
+            <!--전라남도-->
+            <a href="#" id="map_btn_15" onclick="return fn_clickView('15');" style="position:absolute; left:89px; top:349px; z-index:98;">
+                <img src="images/JND.png" id="local_15" alt="전라남도">
+            </a>
+            <div id="map_15" class="linkbanners" style="display:none;">
+                <h2>전라남도</h2>
+                <div class="txt_01"></div>
+            </div>
+            
+            <!--제주도-->
+            <a href="#" id="map_btn_16" onclick="return fn_clickView('16');" style="position:absolute; left:103px; top:495px; z-index:98;">
+                <img src="images/Jeju.png" id="local_16" alt="제주특별자치도">
+            </a>
+            <div id="map_16" class="linkbanners" style="display:none;">
+                <h2>제주특별자치도</h2>
+                <div class="txt_01"></div>
+            </div>
+            
+            <!--광주-->
+            <a href="#" id="map_btn_17" onclick="return fn_clickView('17');" style="position:absolute; left:130px; top:340px; z-index:99;">
+                <img src="images/Gwangju.png" id="local_17" alt="광주">
+            </a>
+            <div id="map_17" class="linkbanners" style="display:none;">
+                <h2>광주광역시</h2>
+                <div class="txt_01"></div>
+            </div>
+        </div>
+        </div>
+    </body>
+</html>
