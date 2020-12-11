@@ -1,5 +1,5 @@
 <?php
-$link = mysqli_connect('localhost:3307', 'root', 'root06', 'dbp');
+$link = mysqli_connect('localhost', 'root', 'rootroot', 'dbp');
 
 $filtered_id = mysqli_real_escape_string($link, $_GET['city']);
 $filtered_gu = mysqli_real_escape_string($link, $_GET['gu']);
@@ -82,6 +82,38 @@ if (strstr($filtered_disabled, 'nondisabled')) {
 <!DOCTYPE html>
 <html>
 <head>
+  <style>
+  table.list-table {
+    border-collapse: collapse;
+    text-align: center;
+    line-height: 1;
+  }
+  table.list-table thead th {
+    /* border-top: 1px solid #787878; */
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: center;
+    color: black;
+    border-bottom: 2px solid #288C28;
+    text-align: center;
+  }
+  table.list-table tbody th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: center;
+    border-bottom: 1px solid #ccc;
+    background: #f3f6f7;
+    text-align: center;
+  }
+  table.list-table td {
+    color: #787878;
+    padding: 10px;
+    vertical-align: center;
+    border-bottom: 1px solid #ccc;\
+    text-align: center;
+  }
+</style>
   <meta charset="utf-8">
   <script>
   let now;
@@ -222,7 +254,13 @@ if (strstr($filtered_disabled, 'nondisabled')) {
   .search{
     text-align: center;
   }
+  #search{
+text-align:center;
+}
 
+.search1{
+display:inline-block;zoom:1;.display:inline;
+}
   </style>
 
   <article class="subContent" id="contList">
@@ -461,8 +499,8 @@ if (strstr($filtered_disabled, 'nondisabled')) {
 </div>
 </article>
 <br/><br/><br/>
-<div class="search">
-  <a href="index.php"><Button>초기화</Button></a>
+<div id = "search">
+<div class="search1">
   <form action="index_search.php" method="GET"> 지역 검색
     <select onchange="categoryChange(this)" name="city">
       <option value="Every">전체</option>
@@ -489,10 +527,12 @@ if (strstr($filtered_disabled, 'nondisabled')) {
     </select> 장애인용 화장실
     <input type="checkbox" name="disabled" value="disabled">
     <input type="submit" value="검색">
-  </form>
-</div>
+    </form>
+  </div>
+      <div class="search1" ><a href="index.php"><Button>초기화</Button></a></div>
+    </div>
 <div>
-  <table border=1 class="list-table"  align = center>
+  <table class="list-table"  align = center>
     <thead>
       <tr>
         <th>구분</th>
